@@ -16,12 +16,14 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
-            <Route path="/channels">
-              <ChannelListPage />
-            </Route>
             <Route path="/channels/new">
               <NewChannelPage />
             </Route>
+
+            <Route path="/channels">
+              <ChannelListPage />
+            </Route>
+
             <Redirect to="/orders" />
           </Switch>
         </>

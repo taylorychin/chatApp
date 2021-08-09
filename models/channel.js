@@ -12,12 +12,17 @@ const messageSchema = new Schema({
 
 
 const channelSchema = new Schema({
-    title: { type: String, required: true },
+    title: { type: String, required: true, unique: true },
     desc: { type: String },
     favoriteUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
     messages: [messageSchema]
 }, {
     timestamps: true
 });
+
+channelSchema.virtual('channelId').get(function () {
+    return this.id.slice(-6).toUpperCase();
+});
+
 
 module.exports = mongoose.model("Channel", channelSchema);

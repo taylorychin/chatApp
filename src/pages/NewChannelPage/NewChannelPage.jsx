@@ -1,7 +1,30 @@
-import * as userServices from "../../utilities/users-service"
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import * as channelsApi from '../../utilities/channels-api';
 
 export default function NewChannelPage() {
 
+  const [formData, setFormData] = useState({
+    title: "",
+    desc: "",
+  });
+  const history = useHistory();
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      //await channels api create channel 
+      // programatically route to channel list.
+      //guide to usercenteric crud 
+      await channelsApi.createChannel(formData);
+      history.push("/channels");
+    } catch {
+    }
+  }
+
+  function handleChange(evt) {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  }
 
 
   return (
@@ -10,15 +33,14 @@ export default function NewChannelPage() {
       <button>Create your chat channel!</button>
       <div>
         <div className="form-container">
-          <form autoComplete="off" onSubmit={this.handleSubmit}>
+          <form autoComplete="off" onSubmit={handleSubmit}>
             <label>Channel Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
+            <input type="text" name="title" value={formData.name} onChange={handleChange} required />
             <label>Channel Description (optional)</label>
-            <input type="text" name="desc" value={this.state.desc} onChange={this.handleChange} />
-            <button type="submit" disabled={disable}>Create Channel</button>
+            <input type="text" name="desc" value={formData.desc} onChange={handleChange} />
+            <button type="submit" >Create Channel</button>
           </form>
         </div>
-        <p className="error-message">&nbsp;{this.state.error}</p>
       </div>
     </>
   );
