@@ -18,9 +18,11 @@ export default function ChannelListPage() {
       <h1>Pick a Channel</h1>
     // list of links with channel names that link to the channel.
       // use effect hook 
-      <ul>
-        {channels.map((ch) => <li>{ch.title}</li>)}
-      </ul>
+      {/* <Link to="/channels/:id">
+        <ul>
+          {channels.map((ch) => <li>{ch.title}</li>)}
+        </ul>
+      </Link> */}
     </>
   );
 }

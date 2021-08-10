@@ -16,6 +16,10 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
+            {/* <Route path="channels/:id">
+              <ChannelDetailPage />
+            </Route> */}
+
             <Route path="/channels/new">
               <NewChannelPage />
             </Route>
@@ -24,12 +28,12 @@ export default function App() {
               <ChannelListPage />
             </Route>
 
-            <Redirect to="/orders" />
+            {/* <Redirect to="/orders" /> */}
           </Switch>
         </>
         :
         <AuthPage setUser={setUser} />
       }
-    </main>
+    </main >
   );
 }
