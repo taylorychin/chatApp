@@ -10,6 +10,14 @@ export function createChannel(formData) {
     return sendRequest(BASE_URL, 'POST', formData);
 }
 
+export function getOne(channelId) {
+    return sendRequest(`${BASE_URL}/${channelId}`);
+}
+
+export function sendMessage(channelId, message) {
+    return sendRequest(`${BASE_URL}/${channelId}/send`, 'POST', message);
+}
+
 export function getAll() {
     return sendRequest(BASE_URL);
 }

@@ -11,6 +11,10 @@ require('./config/database');
 
 const app = express();
 
+//socket.io needs to connect to the http server
+const http = require('http').Server(app);
+require('./config/io').init(http);
+
 app.use(logger('dev'));
 // body parser middleware - adds properties to req.body
 app.use(express.json());
@@ -42,6 +46,11 @@ app.get('/*', function (req, res) {
 // to avoid conflicting with the react server
 const port = process.env.PORT || 3001;
 
-app.listen(port, function () {
+http.listen(port, function () {
   console.log(`Express app running on port ${port}`);
 });
+
+//old version
+// app.listen(port, function () {
+//   console.log(`Express app running on port ${port}`);
+// });
