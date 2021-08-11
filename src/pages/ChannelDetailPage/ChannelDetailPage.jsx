@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as channelAPI from "../../utilities/channels-api"
+import TextareaAutosize from 'react-textarea-autosize'
 
 import socket from "../../utilities/socket";
 
 
 export default function ChannelDetailPage() {
     const [channel, setChannel] = useState(null);
-    const [newMessage, setNewMessage] = useState("first message");
+    const [newMessage, setNewMessage] = useState("");
+    const [error, setError] = useState('');
 
     const { id } = useParams();
 
@@ -15,9 +17,16 @@ export default function ChannelDetailPage() {
         setChannel(updatedChannel);
     }
 
-    function handleSendMessage() {
+    function handleSendMessage(evt) {
+        evt.preventDefault();
         channelAPI.sendMessage(id, { content: newMessage });
-        setNewMessage('');
+        setNewMessage("");
+    }
+
+    function handleChange(evt) {
+        setNewMessage(evt.target.value)
+        // setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
+        setError('');
     }
 
     useEffect(() => {
@@ -54,7 +63,12 @@ export default function ChannelDetailPage() {
                     :
                     <h3>There is nothing here</h3>
                 }
-                <button onClick={handleSendMessage} >send message</button>
+                <div className="form-container">
+                    <form onSubmit={handleSendMessage}>
+                        <TextareaAutosize value={newMessage} onChange={handleChange} required />
+                        <button type="submit" >send</button>
+                    </form>
+                </div>
             </div>
         </>
     )
