@@ -16,6 +16,7 @@ const channelSchema = new Schema({
     title: { type: String, required: true, unique: true },
     desc: { type: String },
     favoriteUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    ownerId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     messages: [messageSchema]
 }, {
     timestamps: true

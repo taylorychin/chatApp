@@ -22,11 +22,11 @@ export default function App() {
             </Route>
 
             <Route path="/channels/:id">
-              <ChannelDetailPage />
+              <ChannelDetailPage user={user} />
             </Route>
 
             <Route path="/channels">
-              <ChannelListPage />
+              <ChannelListPage user={user} />
             </Route>
 
             {/* <Redirect to="/channels" /> */}

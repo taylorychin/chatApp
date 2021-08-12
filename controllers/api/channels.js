@@ -7,6 +7,7 @@ module.exports = {
     getAll,
     getOne,
     send,
+    delete: deleteChannel,
 }
 
 
@@ -19,6 +20,7 @@ async function getAll(req, res) {
 async function create(req, res) {
     try {
         req.body.favoriteUsers = [req.user._id];
+        req.body.ownerId = req.user._id;
         const channel = await Channel.create(req.body)
         res.json(channel);
     } catch (err) {
@@ -37,6 +39,7 @@ async function getOne(req, res) {
 }
 
 async function send(req, res) {
+    console.log("send", req.params.id, req.body);
     const channel = await Channel.findById(req.params.id);
     req.body.ownerId = req.user._id;
     req.body.ownerName = req.user.name;
@@ -45,4 +48,15 @@ async function send(req, res) {
     const ioInstance = io.getIo();
     ioInstance.to(req.params.id).emit("channel-updated", channel)
     res.json("message sent");
+}
+
+async function deleteChannel(req, res) {
+    try {
+        await Channel.findOneAndDelete({ _id: req.params.id, ownerId: req.user._id })
+        const channels = await Channel.find({}).sort('title').select('-messages').exec();
+        res.json(channels);
+    }
+    catch (err) {
+        res.json(err.message)
+    }
 }

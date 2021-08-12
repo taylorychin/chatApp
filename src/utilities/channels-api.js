@@ -15,9 +15,14 @@ export function getOne(channelId) {
 }
 
 export function sendMessage(channelId, message) {
+    console.log(channelId, message);
     return sendRequest(`${BASE_URL}/${channelId}/send`, 'POST', message);
 }
 
 export function getAll() {
     return sendRequest(BASE_URL);
+}
+
+export function deleteChannel(channelId) {
+    return sendRequest(`${BASE_URL}/${channelId}`, 'DELETE')
 }
