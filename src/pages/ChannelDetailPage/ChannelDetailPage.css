@@ -3,13 +3,20 @@ html{
 }
 
 body{
-    color: lightgrey;
-    background-color: navy;
-    grid-template-columns: 1fr 3fr 1fr;
-    display: grid; 
+    background-color: rgb(39, 39, 39);
 }
 
 .main-container{
-    grid-column-start: 1;
-    grid-column-end: 4;
+    color: lightgrey;
+    background-color: rgb(39, 39, 39);
+    grid-template-columns: 1fr 2fr 1fr;
+    display: grid; 
+}
+
+.elements{
+    grid-column: 2;
+}
+
+.chat-input{
+    width: 50vw;
 }

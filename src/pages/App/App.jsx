@@ -16,6 +16,7 @@ export default function App() {
       {user ?
         <>
           <NavBar user={user} setUser={setUser} />
+          <hr></hr>
           <Switch>
             <Route path="/channels/new">
               <NewChannelPage />

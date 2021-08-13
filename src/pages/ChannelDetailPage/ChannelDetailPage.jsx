@@ -49,32 +49,35 @@ export default function ChannelDetailPage({ user }) {
     return (
         <>
             <div class="main-container">
-                <h1>{channel.title}</h1>
-                <h3>{channel.desc}</h3>
+                <div class="elements">
 
-                <div>
-                    {channel.messages.length > 0 ?
-                        channel.messages.map((m) =>
-                            <div>
-                                <span> {m.ownerName} </span>
-                                <div> {m.content}
-                                    {/* {user._id === m.ownerId ?
+                    <h1>{channel.title}</h1>
+                    <h3>{channel.desc}</h3>
+
+                    <div>
+                        {channel.messages.length > 0 ?
+                            channel.messages.map((m) =>
+                                <div>
+                                    <span> {m.ownerName} </span>
+                                    <div> {m.content}
+                                        {/* {user._id === m.ownerId ?
                                     <button type="submit" onClick={handle}> X </button>
                                     :
                                     <> </>
                                 } */}
+                                    </div>
                                 </div>
-                            </div>
 
-                        )
-                        :
-                        <h3>There is nothing here</h3>
-                    }
-                    <div className="form-container">
-                        <form onSubmit={handleSendMessage}>
-                            <TextareaAutosize value={newMessage} onChange={handleChange} required />
-                            <button type="submit" >send</button>
-                        </form>
+                            )
+                            :
+                            <h3>There is nothing here</h3>
+                        }
+                        <div className="form-container">
+                            <form onSubmit={handleSendMessage}>
+                                <TextareaAutosize class="chat-input" value={newMessage} onChange={handleChange} required />
+                                <button type="submit" >send</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

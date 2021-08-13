@@ -1,0 +1,7 @@
+.nav-link{
+    color: grey;
+  }
+  .nav-link:hover{
+    color: ghostwhite;
+    background-color: #1a3146; 
+  }

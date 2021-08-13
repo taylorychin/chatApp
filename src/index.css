@@ -8,6 +8,10 @@
   --orange: #F67F00;
   --text-light: #968c84;
   --text-dark: #615954;
+  --bg-dark: rgb(39, 39, 39);
+  --bg-medium: rgb(60,60,60);
+  --dark-blue: rgb(0,30, 190);
+  --grey-blue: rgb(74, 74, 255);
 }
 
 *, *:before, *:after {
@@ -80,7 +84,7 @@ code {
 
 .form-container {
   padding: 3vmin;
-  background-color: var(--tan-1);
+  background-color: var(--bg-medium);
   border: .1vmin solid var(--tan-3);
   border-radius: 1vmin;
 }
@@ -120,8 +124,8 @@ input:focus {
 button, a.button {
   margin: 1vmin;
   padding: 1vmin;
-  color: var(--white);
-  background-color: var(--orange);
+  color: lightgray;
+  background-color: var(--dark-blue);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;
@@ -144,10 +148,10 @@ button.btn-xs {
 
 button:disabled, form:invalid button[type="submit"] {
   cursor: not-allowed;
-  background-color: var(--tan-4);
+  background-color: var(--grey-blue);
 }
 
 button[type="submit"] {
   grid-column: span 2;
-  margin: 1vmin 0 0;
+  margin: 1max 0 0;
 }
