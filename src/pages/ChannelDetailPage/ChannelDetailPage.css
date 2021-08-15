@@ -20,3 +20,16 @@ body{
 .chat-input{
     width: 50vw;
 }
+
+.message-box{
+    text-align: left;
+}
+.messages-container{
+
+    border: 1px solid;
+    border-color: var(--text-light);
+}
+
+.message-box > .message-name{
+    font-weight: bold;
+}

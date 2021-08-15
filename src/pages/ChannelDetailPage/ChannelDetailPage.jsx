@@ -54,12 +54,12 @@ export default function ChannelDetailPage({ user }) {
                     <h1>{channel.title}</h1>
                     <h3>{channel.desc}</h3>
 
-                    <div>
+                    <div class="messages-container">
                         {channel.messages.length > 0 ?
                             channel.messages.map((m) =>
-                                <div>
-                                    <span> {m.ownerName} </span>
-                                    <div> {m.content}
+                                <div class="message-box">
+                                    <span class="message-name"> {m.ownerName} </span>
+                                    <div class="message-content"> &nbsp;&nbsp; {m.content}
                                         {/* {user._id === m.ownerId ?
                                     <button type="submit" onClick={handle}> X </button>
                                     :
