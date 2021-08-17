@@ -39,7 +39,6 @@ async function getOne(req, res) {
 }
 
 async function send(req, res) {
-    console.log("send", req.params.id, req.body);
     const channel = await Channel.findById(req.params.id);
     req.body.ownerId = req.user._id;
     req.body.ownerName = req.user.name;

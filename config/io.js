@@ -1,3 +1,5 @@
+const Channel = require("../models/channel");
+
 let io;
 
 module.exports = {
@@ -9,19 +11,34 @@ function init(http) {
     io = require('socket.io')(http);
 
     io.on('connection', function (socket) {
-        console.log('Client socketed connected');
 
         // Other message listeners below here (stay inside of this 'connection' callback)
-        socket.on("join-channel", (channelId) => {
-            console.log("client joined channel: ", channelId);
+        socket.on("join-channel", async ({ id: channelId, name }) => {
             socket.join(channelId);
+            socket.userName = name;
+            const channel = await Channel.findById(channelId);
+            channel.messages.push({
+                ownerName: "System",
+                content: `${name} has joined the channel.`
+            });
+            await channel.save();
+            io.to(channelId).emit("channel-updated", channel);
         });
-        socket.on("leave-channel", (channelId) => {
-            console.log("client left channel: ", channelId);
+
+        socket.on("leave-channel", async (channelId) => {
             socket.leave(channelId);
+            const channel = await Channel.findById(channelId);
+            channel.messages.push({
+                ownerName: "System",
+                content: `${socket.userName} has left the channel.`
+            });
+            await channel.save();
+            io.to(channelId).emit("channel-updated", channel);
         });
 
     });
+
+
 }
 
 // Used to access the io object from controller modules

@@ -13,11 +13,14 @@ export default function ChannelDetailPage({ user }) {
     const [error, setError] = useState('');
     const textAreaRef = useRef();
     const submitButtonRef = useRef();
+    const messageBoxRef = useRef();
 
     const { id } = useParams();
 
     function handleChannelUpdated(updatedChannel) {
         setChannel(updatedChannel);
+        messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight - messageBoxRef.current.clientHeight;
+        // messageBoxRef.current.scrollIntoView(false)
     }
 
     function handleSendMessage(evt) {
@@ -41,14 +44,13 @@ export default function ChannelDetailPage({ user }) {
         }
         fetchChannel();
         socket.on("channel-updated", handleChannelUpdated);
-        socket.emit("join-channel", id);
+        socket.emit("join-channel", { id, name: user.name });
 
         return () => {
             socket.removeListener("channel-updated", handleChannelUpdated);
             socket.emit("leave-channel", id);
         }
     }, [id])
-
 
     useEffect(() => {
         function handleEnter(event) {
@@ -61,7 +63,8 @@ export default function ChannelDetailPage({ user }) {
         }
         if (textAreaRef.current) {
             textAreaRef.current.addEventListener("keydown", handleEnter);
-            return () => textAreaRef.current.removeEventListener("keydown", handleEnter);
+            //if current exists then check to remove event listener.
+            return () => textAreaRef.current && textAreaRef.current.removeEventListener("keydown", handleEnter);
         }
     }, [textAreaRef.current]);
 
@@ -78,7 +81,7 @@ export default function ChannelDetailPage({ user }) {
                     <div className="messages-container">
                         {channel.messages.length > 0 ?
                             channel.messages.map((m) =>
-                                <div className="message-box" key={m._id}>
+                                <div className="message-box" ref={messageBoxRef} key={m._id}>
                                     <span className="message-name"> {m.ownerName} </span>
                                     <div className="message-content" dangerouslySetInnerHTML={{ __html: m.content }}></div>
                                 </div>
