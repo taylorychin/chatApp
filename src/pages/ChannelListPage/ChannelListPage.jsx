@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as channelsAPI from "../../utilities/channels-api";
+import "./ChannelListPage.css";
 
 
 export default function ChannelListPage({ user }) {
@@ -21,7 +22,7 @@ export default function ChannelListPage({ user }) {
   }, [])
   return (
     <>
-      <h1>Pick a Channel</h1>
+      <h1 id="pick">Pick a Channel</h1>
       {/* // list of links with channel names that link to the channel.
         // use effect hook  */}
       <ul>

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as channelAPI from "../../utilities/channels-api"
 import TextareaAutosize from 'react-textarea-autosize'
 
@@ -11,6 +11,8 @@ export default function ChannelDetailPage({ user }) {
     const [channel, setChannel] = useState(null);
     const [newMessage, setNewMessage] = useState("");
     const [error, setError] = useState('');
+    const textAreaRef = useRef();
+    const submitButtonRef = useRef();
 
     const { id } = useParams();
 
@@ -20,7 +22,8 @@ export default function ChannelDetailPage({ user }) {
 
     function handleSendMessage(evt) {
         evt.preventDefault();
-        channelAPI.sendMessage(id, { content: newMessage });
+        const msg = newMessage.replace("\n", "<br/>")
+        channelAPI.sendMessage(id, { content: msg });
         setNewMessage("");
     }
 
@@ -28,6 +31,7 @@ export default function ChannelDetailPage({ user }) {
         setNewMessage(evt.target.value)
         setError('');
     }
+
 
     useEffect(() => {
         async function fetchChannel() {
@@ -45,6 +49,20 @@ export default function ChannelDetailPage({ user }) {
         }
     }, [id])
 
+
+    useEffect(() => {
+        function handleEnter(event) {
+            console.log(event);
+            if (event.shiftKey) return;
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                event.preventDefault();
+                submitButtonRef.current.click();
+            }
+        }
+        if (textAreaRef.current) textAreaRef.current.addEventListener("keydown", handleEnter);
+        return () => textAreaRef.current.removeEventListener("keydown", handleEnter);
+    }, [textAreaRef.current]);
+
     if (!channel) return null;
     return (
         <>
@@ -54,34 +72,41 @@ export default function ChannelDetailPage({ user }) {
                     <h1>{channel.title}</h1>
                     <h3>{channel.desc}</h3>
 
+
                     <div class="messages-container">
                         {channel.messages.length > 0 ?
                             channel.messages.map((m) =>
                                 <div class="message-box">
                                     <span class="message-name"> {m.ownerName} </span>
-                                    <div class="message-content"> &nbsp;&nbsp; {m.content}
-                                        {/* {user._id === m.ownerId ?
-                                    <button type="submit" onClick={handle}> X </button>
-                                    :
-                                    <> </>
-                                } */}
-                                    </div>
+                                    <div class="message-content" dangerouslySetInnerHTML={{ __html: m.content }}></div>
                                 </div>
 
                             )
                             :
                             <h3>There is nothing here</h3>
                         }
-                        <div className="form-container">
-                            <form onSubmit={handleSendMessage}>
-                                <TextareaAutosize class="chat-input" value={newMessage} onChange={handleChange} required />
-                                <button type="submit" >send</button>
-                            </form>
-                        </div>
+                    </div>
+
+                    {/* {user._id === m.ownerId ?
+                        <button type="submit" onClick={handle}> X </button>
+                        :
+                        <> </>
+                        } */}
+                    <div className="form-container">
+                        <form onSubmit={handleSendMessage}>
+
+                            <TextareaAutosize ref={textAreaRef} class="chat-input" value={newMessage} onChange={handleChange} required />
+                            <button ref={submitButtonRef} type="submit" class="send-button">send</button>
+
+                        </form>
                     </div>
                 </div>
             </div>
         </>
     )
 
+
+
+
 }
+// https://allegra9.medium.com/add-emoji-picker-to-your-react-chat-app-30d8cbe8d9a6
