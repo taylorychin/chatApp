@@ -1,0 +1,12 @@
+.channel-create-div{
+    grid-template-columns: 1fr 2fr 1fr;
+    display: grid; 
+}
+
+.form-container{
+    grid-column: 2;
+}
+
+.channel-create-div button {
+    max-width: 10vw;
+}

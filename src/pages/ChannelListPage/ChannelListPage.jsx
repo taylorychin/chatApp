@@ -25,10 +25,10 @@ export default function ChannelListPage({ user }) {
       <h1 id="pick">Pick a Channel</h1>
       {/* // list of links with channel names that link to the channel.
         // use effect hook  */}
-      <ul>
+      <ul className="channel-list">
         {channels.map((ch) =>
-          <li class="channel-link" key={ch._id}>
-            <Link class="nav-link" to={`/channels/${ch._id}`}>
+          <li className="channel-link" key={ch._id}>
+            <Link className="nav-link" to={`/channels/${ch._id}`}>
               {ch.title}
             </Link>
             {user._id === ch.ownerId ?

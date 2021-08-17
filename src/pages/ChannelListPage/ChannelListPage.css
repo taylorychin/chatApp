@@ -1,3 +1,7 @@
 #pick{
 color: lightgray;
 }
+
+.channel-list{
+    list-style-type: none;
+}

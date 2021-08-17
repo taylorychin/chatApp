@@ -1,0 +1,12 @@
+.sign-up-div{
+    grid-template-columns: 1fr 2fr 1fr;
+    display: grid; 
+}
+
+.form-container{
+    grid-column: 2;
+}
+
+.sign-up-div button {
+    max-width: 10vw;
+}

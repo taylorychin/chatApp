@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { signUp } from '../../utilities/users-service';
+import "./SignUpForm.css";
 
 export default class SignUpForm extends Component {
   state = {
@@ -25,7 +26,7 @@ export default class SignUpForm extends Component {
     try {
       // We don't want to send the 'error' or the 
       // 'confirm state properties
-      const formData = {...this.state};
+      const formData = { ...this.state };
       delete formData.error;
       delete formData.confirm;
       // The promise returned by the signUp service methods
@@ -36,7 +37,7 @@ export default class SignUpForm extends Component {
       this.props.setUser(user);
     } catch {
       // An error occurred
-      this.setState({ error: 'Sign Up Failed - Try Again'});
+      this.setState({ error: 'Sign Up Failed - Try Again' });
     }
   };
 
@@ -47,7 +48,7 @@ export default class SignUpForm extends Component {
   render() {
     const disable = this.state.password !== this.state.confirm;
     return (
-      <div>
+      <div className="sign-up-div">
         <div className="form-container">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
             <label>Name</label>

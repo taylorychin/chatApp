@@ -30,7 +30,7 @@ export default function App() {
               <ChannelListPage user={user} />
             </Route>
 
-            {/* <Redirect to="/channels" /> */}
+            <Redirect to="/channels" />
           </Switch>
         </>
         :

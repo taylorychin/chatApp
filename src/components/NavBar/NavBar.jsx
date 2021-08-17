@@ -11,11 +11,11 @@ export default function NavBar(props) {
 
   return (
     <nav>
-      <Link class="nav-link" to="/channels">Channel List</Link>
+      <Link className="nav-link" to="/channels">Channel List</Link>
       &nbsp; | &nbsp;
-      <Link class="nav-link" to="/channels/new">New Channel</Link>
-      &nbsp;&nbsp;<span>Welcome, {props.user.name}</span>
-      &nbsp;&nbsp;<Link class="nav-link" onClick={handleLogOut} to="">Log Out</Link>
+      <Link className="nav-link" to="/channels/new">New Channel</Link>
+      &nbsp;&nbsp;<span className="nav-span">Welcome, {props.user.name}</span>
+      &nbsp;&nbsp;<Link className="nav-link" onClick={handleLogOut} to="">Log Out</Link>
     </nav>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as channelsApi from '../../utilities/channels-api';
+import "./NewChannelPage.css";
 
 export default function NewChannelPage() {
 
@@ -29,9 +30,8 @@ export default function NewChannelPage() {
 
   return (
     <>
-      <h1> something </h1>
-      <button>Create your chat channel!</button>
-      <div>
+      <h1>Create your chat channel!</h1>
+      <div className="channel-create-div">
         <div className="form-container">
           <form autoComplete="off" onSubmit={handleSubmit}>
             <label>Channel Name</label>

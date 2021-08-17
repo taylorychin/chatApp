@@ -59,26 +59,28 @@ export default function ChannelDetailPage({ user }) {
                 submitButtonRef.current.click();
             }
         }
-        if (textAreaRef.current) textAreaRef.current.addEventListener("keydown", handleEnter);
-        return () => textAreaRef.current.removeEventListener("keydown", handleEnter);
+        if (textAreaRef.current) {
+            textAreaRef.current.addEventListener("keydown", handleEnter);
+            return () => textAreaRef.current.removeEventListener("keydown", handleEnter);
+        }
     }, [textAreaRef.current]);
 
     if (!channel) return null;
     return (
         <>
-            <div class="main-container">
-                <div class="elements">
+            <div className="main-container">
+                <div className="elements">
 
                     <h1>{channel.title}</h1>
                     <h3>{channel.desc}</h3>
 
 
-                    <div class="messages-container">
+                    <div className="messages-container">
                         {channel.messages.length > 0 ?
                             channel.messages.map((m) =>
-                                <div class="message-box">
-                                    <span class="message-name"> {m.ownerName} </span>
-                                    <div class="message-content" dangerouslySetInnerHTML={{ __html: m.content }}></div>
+                                <div className="message-box" key={m._id}>
+                                    <span className="message-name"> {m.ownerName} </span>
+                                    <div className="message-content" dangerouslySetInnerHTML={{ __html: m.content }}></div>
                                 </div>
 
                             )
@@ -95,8 +97,8 @@ export default function ChannelDetailPage({ user }) {
                     <div className="form-container">
                         <form onSubmit={handleSendMessage}>
 
-                            <TextareaAutosize ref={textAreaRef} class="chat-input" value={newMessage} onChange={handleChange} required />
-                            <button ref={submitButtonRef} type="submit" class="send-button">send</button>
+                            <TextareaAutosize ref={textAreaRef} className="chat-input" value={newMessage} onChange={handleChange} required />
+                            <button ref={submitButtonRef} type="submit" className="send-button">send</button>
 
                         </form>
                     </div>
