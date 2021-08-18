@@ -9,7 +9,7 @@ This is a webapp designed to emulate an IRC style chat client.
 
 ![Chat Window Page](https://i.imgur.com/i2e1J56.png)
 
-![Create Channel Page](https://i.imgur.com/i2e1J56.png)
+![Create Channel Page](https://i.imgur.com/JrWltzz.png)
 
 # Technologies Used
 HTML  
