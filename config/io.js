@@ -17,9 +17,10 @@ function init(http) {
             socket.join(channelId);
             socket.userName = name;
             const channel = await Channel.findById(channelId);
+            //able to  use html tags in comments because of the dangerously set html in channeldetailpage
             channel.messages.push({
                 ownerName: "System",
-                content: `${name} has joined the channel.`
+                content: `<span style="color:green">${name} has joined the channel.</span>`
             });
             await channel.save();
             io.to(channelId).emit("channel-updated", channel);
@@ -30,7 +31,7 @@ function init(http) {
             const channel = await Channel.findById(channelId);
             channel.messages.push({
                 ownerName: "System",
-                content: `${socket.userName} has left the channel.`
+                content: `<span style="color:red">${socket.userName} has left the channel. </span>`
             });
             await channel.save();
             io.to(channelId).emit("channel-updated", channel);
