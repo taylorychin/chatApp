@@ -1,32 +1,36 @@
-To sync your code:
 
-git fetch --all
-git reset --hard origin/main
+# Chat App
+This is a webapp designed to emulate an IRC style chat client.
 
 
-# MERN-Stack Infrastructure
-Clone this repo to provide the starter code for a comprehensive MERN-Stack project including token-based authentication.
 
-reset commit history
-So that you don't have a bunch of commits made by me, let's start a fresh local repo:
-rm -rf .git
-git init
+# Screen Shots
+![List Screen](https://i.imgur.com/H0MXSXr.png)
 
-Next, let's ensure that we've committed our code as it stands:
-git add -A
-git commit -m "MERN-Stack Infrastructure"
+![Chat Window Page](https://i.imgur.com/i2e1J56.png)
 
-Refresh the Repo
+![Create Channel Page](https://i.imgur.com/i2e1J56.png)
 
-Refreshing the repo should confirm that the repo is ready for cloning when needed!
-5. Using mern-infrastructure to Create MERN-Stack Projects in the Future
+# Technologies Used
+HTML  
+CSS  
+Javascript
+Express
+mongoDB
+nodejs
+react
+heroku
 
-Here's the process to create a new MERN-Stack project that starts with the infrastructure code:
 
-    1. Clone the mern-infrastructure repo.
-    2. Rename the newly mern-infrastructure folder to the name of your new project.
-    3. Optionally, update the "name": "mern-infrastructure" in package.json.
-    4. Create a new repo on your personal GH account.
-    5. Copy the GH repo's URL.
-    6. Update the remote's URL: git remote set-url origin <paste the copied url>
-    7. Push for the first time: git push -u origin main
+
+[TrelloBoard](https://trello.com/b/1UClzyhG/chatapp)
+
+
+# Getting Started
+[Open app](https://chat-app-tc.herokuapp.com//)
+
+When First logging in the user is promted with a login/sign up page. If the user knows URLs that will lead to other pages and attempts to go directly to those they will be redirected to the login/signup page.
+Once logged in the user is directed to the channel listing page where they can pick a channel and enter to room to chat with other users. The chat allows for css styling in text so users can change colors, fonts, font size etc.
+
+# Next Steps
+Given I would like to convert this program from a webpage into a stand alone program and have channels/users in a list on a sidebar instead of only getting notifications through the text channel.
